@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日简报 · 2026年03月25日 星期三</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#080c18;color:#dde4f0;min-height:100vh;padding:16px}
+  .container{max-width:800px;margin:0 auto}
+
+  /* ── HEADER ── */
+  .header{
+    background:linear-gradient(135deg,#0c1a40 0%,#180830 45%,#0a1828 100%);
+    border:1px solid rgba(0,210,255,.22);
+    border-radius:22px;padding:28px 32px;margin-bottom:16px;position:relative;overflow:hidden
+  }
+  .header::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 70% 60% at 75% 40%,rgba(0,210,255,.07) 0%,transparent 70%);
+    pointer-events:none}
+  .header::after{content:'';position:absolute;top:-1px;left:30%;right:30%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(0,210,255,.6),transparent)}
+  .h-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .h-brand{font-size:11px;color:#00d0ff;letter-spacing:4px;text-transform:uppercase;margin-bottom:7px;opacity:.75}
+  .h-date{font-size:26px;font-weight:700;
+    background:linear-gradient(90deg,#fff 40%,#00d0ff);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+  .h-sub{font-size:12px;color:rgba(255,255,255,.38);margin-top:5px;display:flex;gap:14px;flex-wrap:wrap}
+  .h-badge{
+    background:rgba(0,210,255,.1);border:1px solid rgba(0,210,255,.28);
+    border-radius:50px;padding:6px 14px;font-size:11px;color:#00d0ff;white-space:nowrap;height:fit-content
+  }
+
+  /* ── CARD ── */
+  .card{
+    background:#0d1524;border:1px solid rgba(255,255,255,.07);
+    border-radius:18px;padding:20px 24px;margin-bottom:14px
+  }
+  .card-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,.055)}
+  .c-icon{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .c-title{font-size:15px;font-weight:600;color:#fff}
+  .c-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:2px}
+
+  /* accent */
+  .ac-blue  {border-top:3px solid #00d0ff}
+  .ac-green {border-top:3px solid #22c55e}
+  .ac-purple{border-top:3px solid #a855f7}
+  .ac-pink  {border-top:3px solid #f43f5e}
+  .bg-blue  {background:rgba(0,208,255,.11)}
+  .bg-green {background:rgba(34,197,94,.11)}
+  .bg-purple{background:rgba(168,85,247,.11)}
+  .bg-pink  {background:rgba(244,63,94,.11)}
+
+  /* ── WEATHER ── */
+  .w-main{display:flex;gap:18px;align-items:flex-start;margin-bottom:14px}
+  .w-temp{font-size:68px;font-weight:300;line-height:1;color:#fff}
+  .w-temp sup{font-size:22px;vertical-align:top;margin-top:10px;color:rgba(255,255,255,.55)}
+  .w-desc{font-size:19px;font-weight:500;color:#7dd3fc;margin-bottom:10px}
+  .w-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .w-tag{background:rgba(255,255,255,.06);border-radius:8px;padding:4px 11px;font-size:12px;color:rgba(255,255,255,.58)}
+  .w-tip{
+    background:linear-gradient(135deg,rgba(34,197,94,.09),rgba(16,185,129,.05));
+    border:1px solid rgba(34,197,94,.2);border-radius:10px;
+    padding:10px 14px;font-size:13px;color:#6ee7b7;margin-top:12px
+  }
+  .fc-row{display:flex;gap:8px;margin-top:12px}
+  .fc-item{flex:1;background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center}
+  .fc-lbl{font-size:11px;color:rgba(255,255,255,.38);margin-bottom:4px}
+  .fc-desc{font-size:12px;margin-bottom:4px}
+  .fc-temp{font-size:12px;color:#7dd3fc;font-weight:600}
+
+  /* ── SCHEDULE ── */
+  .sched-empty{text-align:center;padding:22px;color:rgba(255,255,255,.28);font-size:14px;border:1px dashed rgba(255,255,255,.1);border-radius:10px}
+  .sched-empty .ico{font-size:26px;margin-bottom:8px}
+
+  /* ── NEWS ── */
+  .n-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.045)}
+  .n-item:last-child{border-bottom:none;padding-bottom:0}
+  .n-num{font-size:19px;font-weight:700;opacity:.38;min-width:26px;line-height:1.5;font-variant-numeric:tabular-nums}
+  .n-body{flex:1;min-width:0}
+  .n-title{font-size:13.5px;font-weight:500;text-decoration:none;line-height:1.55;display:block;transition:opacity .2s;word-break:break-all}
+  .n-title:hover{opacity:.7;text-decoration:underline}
+  .n-snip{font-size:12px;color:rgba(255,255,255,.32);margin-top:3px;line-height:1.5;word-break:break-all}
+  .n-meta{font-size:11px;color:rgba(255,100,100,.55);margin-top:2px}
+  .n-time{font-size:11px;color:rgba(255,255,255,.25);margin-top:2px}
+
+  /* ── FOOTER ── */
+  .footer{text-align:center;padding:18px;font-size:11px;color:rgba(255,255,255,.18);letter-spacing:1px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);margin:4px 0 16px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="h-top">
+    <div>
+      <div class="h-brand">☀ 乐活书咖 · 每日简报</div>
+      <div class="h-date">2026年03月25日 &nbsp;星期三</div>
+      <div class="h-sub">
+        <span>🕐 生成时间 06:47</span>
+        <span>📍 深圳</span>
+        <span>农历 二月初七</span>
+      </div>
+    </div>
+    <div class="h-badge">🤖 AI 实时生成</div>
+  </div>
+</div>
+
+<!-- ══ 天气 ══ -->
+<div class="card ac-blue">
+  <div class="card-hd">
+    <div class="c-icon bg-blue">☀️</div>
+    <div>
+      <div class="c-title">深圳天气</div>
+      <div class="c-sub">实时气象 · 今日穿衣建议 · 3日预报</div>
+    </div>
+  </div>
+  <div class="w-main">
+    <div class="w-temp">23<sup>°C</sup></div>
+    <div style="flex:1">
+      <div class="w-desc">☀️ 晴朗</div>
+      <div class="w-tags">
+        <span class="w-tag">💧 湿度 89%</span>
+        <span class="w-tag">🌡️ 体感 25°C</span>
+        <span class="w-tag">💨 风速 4km/h · SSE</span>
+        <span class="w-tag">👁️ 能见度 10km</span>
+        <span class="w-tag">🕕 日出 06:23 · 日落 18:36</span>
+      </div>
+    </div>
+  </div>
+  <div class="w-tip">👕 建议穿薄长袖，湿度较高注意防潮；下午气温升至29°C可搭配防晒</div>
+  <div class="fc-row">
+    <div class="fc-item">
+      <div class="fc-lbl">今天 周三</div>
+      <div class="fc-desc">☀️ 晴</div>
+      <div class="fc-temp">22° ~ 29°</div>
+    </div>
+    <div class="fc-item">
+      <div class="fc-lbl">明天 周四</div>
+      <div class="fc-desc">🌦️ 有小雨</div>
+      <div class="fc-temp">22° ~ 24°</div>
+    </div>
+    <div class="fc-item">
+      <div class="fc-lbl">后天 周五</div>
+      <div class="fc-desc">⛅ 晴间云</div>
+      <div class="fc-temp">21° ~ 27°</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 工作安排 ══ -->
+<div class="card ac-green">
+  <div class="card-hd">
+    <div class="c-icon bg-green">📅</div>
+    <div>
+      <div class="c-title">今日工作安排</div>
+      <div class="c-sub">日程 · 任务 · 提醒</div>
+    </div>
+  </div>
+  <div class="sched-empty">
+    <div class="ico">📋</div>
+    暂无安排，请手动添加
+  </div>
+</div>
+
+<!-- ══ 国际热点 ══ -->
+<div class="card ac-blue">
+  <div class="card-hd">
+    <div class="c-icon bg-blue">🌍</div>
+    <div>
+      <div class="c-title">国际热点资讯</div>
+      <div class="c-sub">今日最新 · 全球视野</div>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#00d0ff">01</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#00d0ff" href="https://news.cctv.com/world/" target="_blank">国际新闻早知道：伊方重申结束战争条件，美军约3000人将赴中东</a>
+      <p class="n-snip">据央视新闻，伊朗重申战争结束相关条件，同期美国宣布约3000名军事人员将前往中东地区，中东局势持续紧张，各方外交斡旋加快推进。</p>
+      <p class="n-time">⏱ 8分钟前 · 央视新闻</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#00d0ff">02</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#00d0ff" href="https://finance.eastmoney.com/" target="_blank">美伊谈判本周或启动，全球市场迎重大变局；央行5000亿MLF续做提振信心</a>
+      <p class="n-snip">美伊双方或于本周正式启动和谈，国际油价及全球股市预期大幅波动；央行同日开展5000亿元MLF操作，连续13个月加量续做，保持流动性充裕。</p>
+      <p class="n-time">⏱ 1小时前 · 每日经济新闻</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#00d0ff">03</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#00d0ff" href="https://news.cctv.com/" target="_blank">日本自卫队人员闯入驻华使馆被逮捕，中方要求日方立即彻查</a>
+      <p class="n-snip">一名日本自卫队人员闯入中国驻日大使馆，已被逮捕。中方就此事件表达严正立场，要求日本方面立即展开彻底调查并给出明确答复。</p>
+      <p class="n-time">⏱ 今日 · 央视新闻</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#00d0ff">04</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#00d0ff" href="https://www.boaoforum.org/" target="_blank">博鳌亚洲论坛25周年：世界与中国握手，共商亚洲发展新方向</a>
+      <p class="n-snip">博鳌亚洲论坛迎来创立25周年，论坛持续打造国际政商对话平台，为亚洲和世界发展凝聚正能量，吸引全球政商领袖齐聚海南共议未来。</p>
+      <p class="n-time">⏱ 今日 · 中国网</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#00d0ff">05</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#00d0ff" href="https://finance.sina.com.cn/" target="_blank">国际油价持续震荡，地缘政治与OPEC决策成核心变量</a>
+      <p class="n-snip">受中东局势影响，国际油价近期波动剧烈，布伦特原油维持在敏感区间，市场正密切关注美伊谈判结果及OPEC+下一步产量策略。</p>
+      <p class="n-time">⏱ 今日 · 新浪财经</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AI热点 ══ -->
+<div class="card ac-purple">
+  <div class="card-hd">
+    <div class="c-icon bg-purple">🤖</div>
+    <div>
+      <div class="c-title">AI 热点资讯</div>
+      <div class="c-sub">人工智能 · 今日最新动态</div>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#a855f7">01</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#a855f7" href="https://www.douyin.com/search/%E6%88%91%E5%9B%BD%E6%97%A5%E5%9D%87%E8%AF%8D%E5%85%83%E8%B0%83%E7%94%A8%E9%87%8F%E8%B6%85140%E4%B8%87%E4%BA%BF" target="_blank">🔥 我国日均词元调用量突破140万亿，AI规模应用全球领跑</a>
+      <p class="n-snip">官方数据显示，我国AI大模型日均词元调用量已突破140万亿，反映出AI技术在国内从试验走向大规模落地的深刻变革，登上抖音热榜前三。</p>
+      <p class="n-time">⏱ 今日 · 热度 10,466,026</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#a855f7">02</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#a855f7" href="https://tech.sina.com.cn/" target="_blank">第三届中关村论坛AI主题日开幕（3月25-29日），全球顶尖专家汇聚海淀</a>
+      <p class="n-snip">论坛以"交融·智享：AI新范式下的全球创新"为主题，汇聚全球人工智能领域顶尖专家学者，共同探讨大模型、具身智能等前沿议题。</p>
+      <p class="n-time">⏱ 今日 · 光明网</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#a855f7">03</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#a855f7" href="https://finance.sina.com.cn/" target="_blank">英伟达发布《金融服务业AI现状2026》：AI应用已走出试验阶段</a>
+      <p class="n-snip">英伟达最新报告显示，AI在金融行业的应用已全面超越试验阶段，覆盖风控、反欺诈、智能投顾等核心业务，产业深度融合进入加速期。</p>
+      <p class="n-time">⏱ 昨日 · 新浪财经</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#a855f7">04</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#a855f7" href="https://tech.cnr.cn/" target="_blank">从"动口"到"动手"：智能体时代开启，AI产业迎来新变局</a>
+      <p class="n-snip">随着OpenClaw、DeepSeek等智能体与大模型的双线进化，AI正从"对话工具"升级为"自动执行者"，引发各行业运营方式的深度重构。</p>
+      <p class="n-time">⏱ 今日 · 央广网</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#a855f7">05</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#a855f7" href="https://www.jiqizhixin.com/" target="_blank">全球AI、具身智能与低空经济三赛道交汇：2026年产业全景洞察</a>
+      <p class="n-snip">站在2026年3月这一关键节点，AI大模型、具身智能机器人与低空经济同步爆发，三大赛道形成协同效应，推动新一轮科技产业革命加速到来。</p>
+      <p class="n-time">⏱ 今日 10分钟前 · 智享汇</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 短视频热点 ══ -->
+<div class="card ac-pink">
+  <div class="card-hd">
+    <div class="c-icon bg-pink">📱</div>
+    <div>
+      <div class="c-title">短视频平台热点</div>
+      <div class="c-sub">抖音实时热榜 · 今日 TOP 5（06:47 更新）</div>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#f43f5e">01</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#f43f5e" href="https://www.douyin.com/search/%E4%BA%BA%E6%B0%91%E7%BD%91%E8%AF%84%E2%80%9C%E9%9B%AA%E5%B1%B1%E6%95%91%E7%8B%90%E2%80%9D%E6%BC%94%E7%BB%8E" target="_blank">人民网评"雪山救狐"演绎</a>
+      <p class="n-snip">雪山救狐温情视频引爆全网，人民网发表评论，网友热议人与自然和谐共处的感人画面。</p>
+      <p class="n-meta">🔥 热度 12,075,168 &nbsp;🏷️ 热点</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#f43f5e">02</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#f43f5e" href="https://www.douyin.com/search/%E4%B8%83%E5%BD%A9%E4%BA%91%E5%8D%97%E4%B8%87%E5%8D%83%E6%B0%94%E8%B1%A1" target="_blank">七彩云南万千气象</a>
+      <p class="n-snip">云南旅游热度不减，各地用户分享七彩云南的壮丽风光与多元民俗，春季出游话题持续引爆。</p>
+      <p class="n-meta">🔥 热度 11,448,551 &nbsp;🏷️ 热点</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#f43f5e">03</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#f43f5e" href="https://www.douyin.com/search/%E6%88%91%E5%9B%BD%E6%97%A5%E5%9D%87%E8%AF%8D%E5%85%83%E8%B0%83%E7%94%A8%E9%87%8F%E8%B6%85140%E4%B8%87%E4%BA%BF" target="_blank">我国日均词元调用量超140万亿</a>
+      <p class="n-snip">AI大模型应用规模话题登上热榜，网友热议中国AI产业飞速发展对日常生活的深刻影响。</p>
+      <p class="n-meta">🔥 热度 10,466,026</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#f43f5e">04</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#f43f5e" href="https://www.douyin.com/search/%E6%99%92%E5%87%BA%E6%88%91%E7%9A%84%E6%98%A5%E6%97%A5%E7%99%BE%E6%90%AD%E5%BC%80%E8%A1%AB" target="_blank">晒出我的春日百搭开衫</a>
+      <p class="n-snip">春日穿搭话题持续爆火，各地网友晒出心爱开衫搭配，多种风格百搭指南引发广泛共鸣与转发。</p>
+      <p class="n-meta">🔥 热度 10,067,751</p>
+    </div>
+  </div>
+
+  <div class="n-item">
+    <span class="n-num" style="color:#f43f5e">05</span>
+    <div class="n-body">
+      <a class="n-title" style="color:#f43f5e" href="https://www.douyin.com/search/%E6%8A%8A%E6%98%A5%E5%A4%A9%E7%A9%BF%E5%87%BA%E9%97%A8" target="_blank">把春天穿出门</a>
+      <p class="n-snip">伴随深圳天气晴好，全国春日出行穿搭热度高涨，网友纷纷分享清新春装造型，品牌联动话题持续扩散。</p>
+      <p class="n-meta">🔥 热度 9,216,743</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  乐活书咖 · 每日简报 &nbsp;|&nbsp; 2026年03月25日 星期三 &nbsp;|&nbsp; 由 AI 实时搜索生成 &nbsp;|&nbsp; 数据来源：wttr.in / 头条搜索 / 抖音热榜
+</div>
+
+</div>
+</body>
+</html>
